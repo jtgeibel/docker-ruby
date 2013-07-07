@@ -12,12 +12,12 @@ mkdir -p /opt/rubies
 
 echo "Installing 2.0.0"
 /usr/local/bin/ruby-build $RUBY_200 /opt/rubies/$RUBY_200
-PATH=/opt/rubies/$RUBY_200 gem install bundler
+PATH=/opt/rubies/$RUBY_200/bin gem install bundler
 
 echo "Installing 1.9.3"
 /usr/local/bin/ruby-build $RUBY_193 /opt/rubies/$RUBY_193
-PATH=/opt/rubies/$RUBY_193 gem install bundler
+PATH=/opt/rubies/$RUBY_193/bin gem install bundler
 
 echo "Installing 1.8.7"
 /usr/local/bin/ruby-build $RUBY_187 /opt/rubies/$RUBY_187
-PATH=/opt/rubies/$RUBY_187 gem install bundler
+PATH=/opt/rubies/$RUBY_187/bin gem install bundler
