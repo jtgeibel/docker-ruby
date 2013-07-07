@@ -1,7 +1,8 @@
 #!/bin/sh
 
 NGINX_VERSION=1.4.1
-RUBY_PATH=/opt/rubies/2.0.0-p247/bin
+RUBY_VERSION=2.0.0-p247
+RUBY_PATH=/opt/rubies/$RUBY_VERSION/bin
 TMP_PATH=/tmp/nginx-build
 
 export PATH=$RUBY_PATH:$PATH
