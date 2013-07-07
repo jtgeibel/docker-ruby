@@ -32,3 +32,5 @@ passenger-install-nginx-module \
 
 cd /
 rm -rf $TMP_PATH
+
+echo "daemon off;" >> /etc/nginx/nginx.conf
