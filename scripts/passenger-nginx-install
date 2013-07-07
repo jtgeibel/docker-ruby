@@ -1,0 +1,34 @@
+#!/bin/sh
+
+NGINX_VERSION=1.4.1
+RUBY_PATH=/opt/rubies/2.0.0-p247/bin
+TMP_PATH=/tmp/nginx-build
+
+export PATH=$RUBY_PATH:$PATH
+
+mkdir -p $TMP_PATH
+cd $TMP_PATH
+
+# Fetch and extract Nginx
+wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
+tar xvfz nginx-$NGINX_VERSION.tar.gz
+cd nginx-$NGINX_VERSION
+
+# Install the latest passenger gem
+apt-get install -y libcurl4-openssl-dev libpcre3 libpcre3-dev
+gem install passenger
+
+# Configure passenger (with ubuntu-style paths)
+passenger-install-nginx-module \
+  --auto \
+  --nginx-source-dir=$TMP_PATH/nginx-$NGINX_VERSION \
+  --prefix=/usr \
+  --extra-configure-flags=" \
+    --conf-path=/etc/nginx/nginx.conf \
+    --pid-path=/var/run/nginx.pid \
+    --sbin-path=/usr/sbin \
+    --error-log-path=/var/log/nginx/error.log \
+    --http-log-path=/var/log/nginx/access.log"
+
+cd /
+rm -rf $TMP_PATH

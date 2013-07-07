@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+echo "Adding precise-security repo"
+docker build -t jtgeibel/ubuntu:precise-security docker/precise-security
+
+echo "Building base image"
+docker build -t jtgeibel/ruby:build-deps docker/build-deps
+
+echo "Installing rubies"
+docker build -t jtgeibel/ruby:all docker/all
+
+echo "Installing nginx with passenger"
+docker build -t jtgeibel/ruby:passenger-nginx docker/passenger-nginx
