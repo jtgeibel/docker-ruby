@@ -1,11 +1,17 @@
 #!/bin/sh
 
 NGINX_VERSION=1.4.1
-RUBY_VERSION=2.0.0-p247
-RUBY_PATH=/opt/rubies/$RUBY_VERSION/bin
+RUBY_200=2.0.0-p247
+RUBY_193=1.9.3-p448
+RUBY_187=1.8.7-p374
+
+RUBY200_PATH=/opt/rubies/$RUBY_200/bin
+RUBY193_PATH=/opt/rubies/$RUBY_193/bin
+RUBY187_PATH=/opt/rubies/$RUBY_187/bin
 TMP_PATH=/tmp/nginx-build
 
-export PATH=$RUBY_PATH:$PATH
+PATH_ORIG=$PATH
+export PATH=$RUBY200_PATH:$PATH_ORIG
 
 mkdir -p $TMP_PATH
 cd $TMP_PATH
@@ -30,6 +36,16 @@ passenger-install-nginx-module \
     --sbin-path=/usr/sbin \
     --error-log-path=/var/log/nginx/error.log \
     --http-log-path=/var/log/nginx/access.log"
+
+# Precompile passenger native_support for other rubies
+# https://code.google.com/p/phusion-passenger/issues/detail?id=865
+cd `passenger-config --root`
+
+export PATH=$RUBY193_PATH:$PATH_ORIG
+rake native_support
+
+export PATH=$RUBY187_PATH:$PATH_ORIG
+rake native_support
 
 cd /
 rm -rf $TMP_PATH
