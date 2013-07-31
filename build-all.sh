@@ -7,12 +7,24 @@ docker build -t jtgeibel/ubuntu:precise-security docker/precise-security
 echo "Building base image"
 docker build -t jtgeibel/ruby:build-deps docker/build-deps
 
-echo "Installing rubies"
-docker build -t jtgeibel/ruby:all docker/all
+BASE=jtgeibel/ruby:build-deps
+NAME=jtgeibel/ruby:all
+echo "Building $NAME"
+ID=$(cat scripts/install-all-latest-rubies | docker run -i -a stdin "$BASE" /bin/sh)
+docker wait $ID > /dev/null
+ID=$(docker commit $ID)
+docker tag $ID "$NAME"
+echo "Build success, image tagged as $NAME"
 
 echo "Install common gem dependencies"
 docker build -t jtgeibel/ruby:common-deps docker/common-deps
 docker tag jtgeibel/ruby:common-deps jtgeibel/ruby
 
-echo "Installing nginx with passenger"
-docker build -t jtgeibel/passenger-nginx docker/passenger-nginx
+BASE=jtgeibel/ruby
+NAME=jtgeibel/passenger-nginx
+echo "Building $NAME"
+ID=$(cat scripts/passenger-nginx-install | docker run -i -a stdin "$BASE" /bin/sh)
+docker wait $ID > /dev/null
+ID=$(docker commit $ID)
+docker tag $ID "$NAME"
+echo "Build success, image tagged as $NAME"
