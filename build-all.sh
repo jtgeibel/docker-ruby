@@ -8,7 +8,7 @@ echo "Building base image"
 docker build -t jtgeibel/ruby:build-deps docker/build-deps
 
 BASE=jtgeibel/ruby:build-deps
-NAME=jtgeibel/ruby:all
+NAME="jtgeibel/ruby:all"
 echo "Building $NAME"
 ID=$(cat scripts/install-all-latest-rubies | docker run -i -a stdin "$BASE" /bin/sh)
 docker wait $ID > /dev/null

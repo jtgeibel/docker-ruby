@@ -1,14 +1,19 @@
 #!/bin/sh
 set -e
 
-RUBY_200=2.0.0-p247
-RUBY_193=1.9.3-p448
+RUBY_210=2.1.0
+RUBY_200=2.0.0-p353
+RUBY_193=1.9.3-p484
 RUBY_187=1.8.7-p374
 
 export RUBY_CONFIGURE_OPTS="--disable-install-doc"
 echo "gem: --no-ri --no-rdoc" > /.gemrc
 
 mkdir -p /opt/rubies
+
+echo "Installing 2.1.0"
+/usr/local/bin/ruby-build $RUBY_210 /opt/rubies/$RUBY_210
+PATH=/opt/rubies/$RUBY_210/bin gem install bundler
 
 echo "Installing 2.0.0"
 /usr/local/bin/ruby-build $RUBY_200 /opt/rubies/$RUBY_200
