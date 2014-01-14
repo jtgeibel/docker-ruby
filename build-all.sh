@@ -1,13 +1,10 @@
 #!/bin/sh
 set -e
 
-echo "Adding precise-security repo"
-docker build -t jtgeibel/ubuntu:precise-security docker/precise-security
-
 echo "Building base image"
-docker build -t jtgeibel/ruby:build-deps docker/build-deps
+docker build -t jtgeibel/ruby-build-deps docker/build-deps
 
-BASE=jtgeibel/ruby:build-deps
+BASE=jtgeibel/ruby-build-deps
 NAME="jtgeibel/ruby:all"
 echo "Building $NAME"
 ID=$(cat scripts/install-all-latest-rubies | docker run -i -a stdin "$BASE" /bin/sh)
