@@ -3,7 +3,7 @@ set -e
 set -x
 
 BASE=jtgeibel/passenger-nginx
-NAME=pge
+NAME=jtgeibel/pge
 
 ID=$(cat inject.sh | docker run -i -a stdin "$BASE" /bin/sh)
 docker wait $ID > /dev/null
