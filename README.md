@@ -4,6 +4,7 @@ This repository includes scripts for generating docker images which include pass
 
 To create the images, run:
 
-    ./base-images/build-all.sh
+    cd base-images
+    ./build-all.sh
 
 These scripts hard code several values, including my username, so will likely require customization for any other use.
