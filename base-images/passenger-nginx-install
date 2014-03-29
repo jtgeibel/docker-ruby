@@ -1,13 +1,13 @@
 #!/bin/sh
 set -e
 
-NGINX_VERSION=1.4.6
+NGINX_VERSION=1.4.7
 RUBY_210=2.1.1
-RUBY_200=2.0.0-p451
+RUBY_193=1.9.3-p545
 RUBY_187=1.8.7-p374
 
 RUBY210_PATH=/opt/rubies/$RUBY_210/bin
-RUBY200_PATH=/opt/rubies/$RUBY_200/bin
+RUBY193_PATH=/opt/rubies/$RUBY_193/bin
 RUBY187_PATH=/opt/rubies/$RUBY_187/bin
 TMP_PATH=/tmp/nginx-build
 
@@ -42,7 +42,7 @@ passenger-install-nginx-module \
 cd `passenger-config --root`
 rake native_support
 
-export PATH=$RUBY_200_PATH:$PATH_ORIG
+export PATH=$RUBY193_PATH:$PATH_ORIG
 rake native_support
 
 export PATH=$RUBY187_PATH:$PATH_ORIG
