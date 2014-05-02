@@ -5,21 +5,28 @@ RUBY_210=2.1.1
 RUBY_193=1.9.3-p545
 RUBY_187=1.8.7-p374
 
+RUBY210_PATH=/opt/rubies/$RUBY_210
+RUBY193_PATH=/opt/rubies/$RUBY_193
+RUBY187_PATH=/opt/rubies/$RUBY_187
+
+
 export RUBY_CONFIGURE_OPTS="--disable-install-doc"
 echo "gem: --no-ri --no-rdoc" > /.gemrc
 
 export MAKE_OPTS="-j2"
 
-mkdir -p /opt/rubies
+mkdir -p /opt/rubies/latest
 
 echo "Installing $RUBY_210"
-/usr/local/bin/ruby-build $RUBY_210 /opt/rubies/$RUBY_210
-PATH=/opt/rubies/$RUBY_210/bin gem install bundler
+curl -fsSL https://gist.github.com/mislav/a18b9d7f0dc5b9efc162.txt | /usr/local/bin/ruby-build --patch $RUBY_210 $RUBY210_PATH
+PATH=$RUBY210_PATH/bin gem install bundler
 
 echo "Installing $RUBY_193"
-/usr/local/bin/ruby-build $RUBY_193 /opt/rubies/$RUBY_193
-PATH=/opt/rubies/$RUBY_193/bin gem install bundler rake
+/usr/local/bin/ruby-build $RUBY_193 $RUBY193_PATH
+PATH=$RUBY193_PATH/bin gem install bundler rake
 
 echo "Installing $RUBY_187"
-/usr/local/bin/ruby-build $RUBY_187 /opt/rubies/$RUBY_187
-PATH=/opt/rubies/$RUBY_187/bin gem install bundler rake
+/usr/local/bin/ruby-build $RUBY_187 $RUBY187_PATH
+PATH=$RUBY187_PATH/bin gem install bundler rake
+
+ln -s $RUBY210_PATH/bin/ruby /opt/rubies/latest/ruby
