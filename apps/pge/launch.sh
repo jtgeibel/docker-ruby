@@ -18,9 +18,9 @@ sudo chown nobody:nogroup $LOG_APP $PHOTOS
 sudo mkdir -p $LOG_NGINX
 
 docker run \
-  -v $LOG_APP:/app/log \
+  -v $LOG_APP:/srv/pge/log \
   -v $LOG_NGINX:/var/log/nginx \
-  -v $PHOTOS:/app/public/photos \
+  -v $PHOTOS:/srv/pge/public/photos \
   -p 127.0.0.1:$HOST_PORT:80 \
   -e HOST_IP=$HOST_IP \
   -e DB_PG_USER=$DB_PG_USER \
