@@ -2,8 +2,10 @@
 set -e
 set -x
 
-git clone --depth 1 https://github.com/jtgeibel/pge.git /app
-cd /app
+APP_PATH=/srv/pge
+
+git clone --depth 1 https://github.com/jtgeibel/pge.git $APP_PATH
+cd $APP_PATH
 
 git submodule init
 git submodule update
@@ -14,16 +16,13 @@ git submodule update
 # * config/initializers/session_store.rb
 # * config/newrelic.yml
 
-rm -rf /app/.git /app/vendor/plugins/community_engine/.git
+rm -rf $APP_PATH/.git $APP_PATH/vendor/plugins/community_engine/.git
 
-mkdir -p /app/public/plugin_assets /app/public/photos
-chown nobody:nogroup /app/tmp /app/public/plugin_assets /app/public/photos
+mkdir -p $APP_PATH/public/plugin_assets $APP_PATH/public/photos
+chown nobody:nogroup $APP_PATH/tmp $APP_PATH/public/plugin_assets $APP_PATH/public/photos
 
 export PATH=/opt/rubies/1.8.7-p374/bin:$PATH
 bundle install --deployment --without development --path vendor/bundle --binstubs vendor/bundle/bin
-
-# Load config files
-ln -s /app /app/pge
 
 cat > /etc/nginx/nginx.conf <<\EOF
 # Must turn off daemon mode to get this to run in docker
@@ -59,7 +58,7 @@ http {
 
     passenger_ruby /opt/rubies/1.8.7-p374/bin/ruby;
 
-    root /app/pge/public;
+    root /srv/pge/public;
     passenger_enabled on;
 
     passenger_min_instances 2;
