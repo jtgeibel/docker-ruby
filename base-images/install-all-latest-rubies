@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-RUBY_210=2.1.1
+RUBY_210=2.1.2
 RUBY_193=1.9.3-p545
 RUBY_187=1.8.7-p374
 
@@ -18,7 +18,7 @@ export MAKE_OPTS="-j2"
 mkdir -p /opt/rubies/latest
 
 echo "Installing $RUBY_210"
-curl -fsSL https://gist.github.com/mislav/a18b9d7f0dc5b9efc162.txt | /usr/local/bin/ruby-build --patch $RUBY_210 $RUBY210_PATH
+/usr/local/bin/ruby-build $RUBY_210 $RUBY210_PATH
 PATH=$RUBY210_PATH/bin gem install bundler
 
 echo "Installing $RUBY_193"
