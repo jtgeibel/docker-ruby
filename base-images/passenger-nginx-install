@@ -44,14 +44,13 @@ passenger-install-nginx-module \
 
 # Precompile passenger native_support for other rubies
 # https://code.google.com/p/phusion-passenger/issues/detail?id=865
-cd `passenger-config --root`
-rake native_support
+/opt/rubies/latest/passenger-root/bin/passenger-config build-native-support
 
 export PATH=$RUBY193_PATH/bin:$PATH_ORIG
-rake native_support
+/opt/rubies/latest/passenger-root/bin/passenger-config build-native-support
 
 export PATH=$RUBY187_PATH/bin:$PATH_ORIG
-rake native_support
+/opt/rubies/latest/passenger-root/bin/passenger-config build-native-support
 
 cd /
 rm -rf $TMP_PATH
