@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+apt-get update
+apt-get upgrade -y
+cd /opt/ruby-build
+git pull
+./install.sh
+
 RUBY_210=2.1.2
 RUBY_193=1.9.3-p545
 RUBY_187=1.8.7-p374
@@ -8,7 +14,6 @@ RUBY_187=1.8.7-p374
 RUBY210_PATH=/opt/rubies/$RUBY_210
 RUBY193_PATH=/opt/rubies/$RUBY_193
 RUBY187_PATH=/opt/rubies/$RUBY_187
-
 
 export RUBY_CONFIGURE_OPTS="--disable-install-doc"
 echo "gem: --no-ri --no-rdoc" > /.gemrc
