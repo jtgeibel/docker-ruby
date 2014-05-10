@@ -2,7 +2,7 @@
 set -e
 
 echo "Building base image"
-docker build -t jtgeibel/ruby-build-deps build-deps
+docker build --no-cache --rm -t jtgeibel/ruby-build-deps build-deps
 
 BASE=jtgeibel/ruby-build-deps
 NAME="jtgeibel/ruby:all"
@@ -14,7 +14,7 @@ docker tag $ID "$NAME"
 echo "Build success, image tagged as $NAME"
 
 echo "Install common gem dependencies"
-docker build -t jtgeibel/ruby:common-deps common-deps
+docker build --no-cache --rm -t jtgeibel/ruby:common-deps common-deps
 docker tag jtgeibel/ruby:common-deps jtgeibel/ruby
 
 BASE=jtgeibel/ruby
