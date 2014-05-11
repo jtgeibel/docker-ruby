@@ -18,3 +18,9 @@ cat passenger-nginx-install | docker run -i --name building-passenger "$BASE" /b
 docker commit building-passenger "$NAME"
 docker rm building-passenger
 echo "Build success, image tagged as $NAME"
+
+read -p "Press Enter to push to the registry, or Ctrl+C to cancel" noop
+
+docker push jtgeibel/ruby-build-deps:latest
+docker push jtgeibel/ruby:latest
+docker push jtgeibel/passenger-nginx:latest
