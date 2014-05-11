@@ -1,16 +1,18 @@
 #!/bin/sh
 set -e
 
-echo "Building base image"
-docker build --rm -t jtgeibel/ruby-build-deps build-deps
+USER=jtgeibel
 
-cat install-all-latest-rubies | docker run -i --name building-ruby jtgeibel/ruby-build-deps /bin/sh
-docker commit building-ruby jtgeibel/ruby
-docker tag jtgeibel/ruby jtgeibel/ruby:all
+echo "Building base image"
+docker build --rm -t $USER/ruby-build-deps build-deps
+
+cat install-all-latest-rubies | docker run -i --name building-ruby $USER/ruby-build-deps /bin/sh
+docker commit building-ruby $USER/ruby
+docker tag $USER/ruby $USER/ruby:all
 docker rm building-ruby
 
-BASE=jtgeibel/ruby
-NAME=jtgeibel/passenger-nginx
+BASE=$USER/ruby
+NAME=$USER/passenger-nginx
 echo "Building $NAME"
 cat passenger-nginx-install | docker run -i --name building-passenger "$BASE" /bin/sh
 docker commit building-passenger "$NAME"
