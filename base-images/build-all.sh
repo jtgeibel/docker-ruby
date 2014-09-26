@@ -3,6 +3,8 @@ set -e
 
 USER=jtgeibel
 
+docker pull ubuntu:14.04
+
 echo "Building base image"
 docker build --rm -t $USER/ruby-build-deps build-deps
 
