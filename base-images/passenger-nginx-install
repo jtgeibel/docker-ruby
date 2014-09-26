@@ -1,8 +1,11 @@
 #!/bin/sh
 set -e
 
+apt-get update
+apt-get upgrade -y
+
 NGINX_VERSION=1.6.2
-PASSENGER_VERSION=4.0.50
+PASSENGER_VERSION=4.0.52
 
 RUBY_210=2.1.3
 RUBY_193=1.9.3-p547
