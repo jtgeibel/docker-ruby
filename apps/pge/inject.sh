@@ -4,6 +4,9 @@ set -x
 
 APP_PATH=/srv/pge
 
+apt-get update
+apt-get upgrade -y
+
 git clone --depth 1 https://github.com/jtgeibel/pge.git $APP_PATH
 cd $APP_PATH
 
