@@ -7,9 +7,9 @@ apt-get upgrade -y
 NGINX_VERSION=1.6.2
 PASSENGER_VERSION=4.0.53
 
-RUBY_210=2.1.4
-RUBY_193=1.9.3-p550
-RUBY_187=1.8.7-p374
+RUBY_210=2.1.5 # latest
+RUBY_193=1.9.3-p551 # old stable
+RUBY_187=1.8.7-p374 # depreciated
 
 RUBY210_PATH=/opt/rubies/$RUBY_210
 RUBY193_PATH=/opt/rubies/$RUBY_193
