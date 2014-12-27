@@ -11,9 +11,9 @@ RUBY_220=2.2.0 # latest
 RUBY_193=1.9.3-p551 # old stable
 RUBY_187=1.8.7-p375 # depreciated
 
-RUBY220_PATH=/opt/rubies/$RUBY_220
-RUBY193_PATH=/opt/rubies/$RUBY_193
-RUBY187_PATH=/opt/rubies/$RUBY_187
+RUBY220_PATH=/opt/rubies/2.2
+RUBY193_PATH=/opt/rubies/1.9.3
+RUBY187_PATH=/opt/rubies/1.8.7
 
 export RUBY_CONFIGURE_OPTS="--disable-install-doc"
 echo "gem: --no-ri --no-rdoc" > /.gemrc

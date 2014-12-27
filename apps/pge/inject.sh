@@ -24,7 +24,7 @@ rm -rf $APP_PATH/.git $APP_PATH/vendor/plugins/community_engine/.git
 mkdir -p $APP_PATH/public/plugin_assets $APP_PATH/public/photos
 chown nobody:nogroup $APP_PATH/tmp $APP_PATH/public/plugin_assets $APP_PATH/public/photos
 
-export PATH=/opt/rubies/1.8.7-p375/bin:$PATH
+export PATH=/opt/rubies/1.8.7/bin:$PATH
 bundle install --deployment --without development --path vendor/bundle --binstubs vendor/bundle/bin
 
 cat > /etc/nginx/nginx.conf <<\EOF
@@ -59,7 +59,7 @@ http {
     listen 80 default_server;
     server_name pittsburghgardenexperiment.org;
 
-    passenger_ruby /opt/rubies/1.8.7-p375/bin/ruby;
+    passenger_ruby /opt/rubies/1.8.7/bin/ruby;
 
     root /srv/pge/public;
     passenger_enabled on;
