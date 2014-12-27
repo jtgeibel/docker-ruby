@@ -9,7 +9,7 @@ git pull
 
 RUBY_220=2.2.0 # latest
 RUBY_193=1.9.3-p551 # old stable
-RUBY_187=1.8.7-p374 # depreciated
+RUBY_187=1.8.7-p375 # depreciated
 
 RUBY220_PATH=/opt/rubies/$RUBY_220
 RUBY193_PATH=/opt/rubies/$RUBY_193
