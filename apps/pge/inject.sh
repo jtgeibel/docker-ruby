@@ -42,8 +42,8 @@ http {
 
   set_real_ip_from 172.17.42.1;
 
-  passenger_root /opt/rubies/latest/passenger-root;
-  passenger_ruby /opt/rubies/latest/ruby;
+  passenger_root /opt/passenger/root;
+  passenger_ruby /opt/passenger/ruby;
   passenger_friendly_error_pages off;
 
   passenger_max_pool_size 2;

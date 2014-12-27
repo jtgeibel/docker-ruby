@@ -20,7 +20,7 @@ echo "gem: --no-ri --no-rdoc" > /.gemrc
 
 export MAKE_OPTS="-j2"
 
-mkdir -p /opt/rubies/latest
+mkdir -p /opt/passenger
 
 echo "Installing $RUBY_220"
 /usr/local/bin/ruby-build $RUBY_220 $RUBY220_PATH
@@ -34,4 +34,4 @@ echo "Installing $RUBY_187"
 /usr/local/bin/ruby-build $RUBY_187 $RUBY187_PATH
 PATH=$RUBY187_PATH/bin gem install bundler rake
 
-ln -s $RUBY220_PATH/bin/ruby /opt/rubies/latest/ruby
+ln -s $RUBY220_PATH/bin/ruby /opt/passenger/ruby

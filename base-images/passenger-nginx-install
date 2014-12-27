@@ -30,7 +30,7 @@ tar xfz nginx-$NGINX_VERSION.tar.gz
 cd nginx-$NGINX_VERSION
 
 gem install passenger -v "$PASSENGER_VERSION"
-ln -s $RUBY220_PATH/lib/ruby/gems/2.2.0/gems/passenger-$PASSENGER_VERSION /opt/rubies/latest/passenger-root
+ln -s $RUBY220_PATH/lib/ruby/gems/2.2.0/gems/passenger-$PASSENGER_VERSION /opt/passenger/root
 
 # Configure passenger (with ubuntu-style paths)
 passenger-install-nginx-module \
@@ -47,13 +47,13 @@ passenger-install-nginx-module \
 
 # Precompile passenger native_support for other rubies
 # https://code.google.com/p/phusion-passenger/issues/detail?id=865
-/opt/rubies/latest/passenger-root/bin/passenger-config build-native-support
+/opt/passenger/root/bin/passenger-config build-native-support
 
 export PATH=$RUBY193_PATH/bin:$PATH_ORIG
-/opt/rubies/latest/passenger-root/bin/passenger-config build-native-support
+/opt/passenger/root/bin/passenger-config build-native-support
 
 export PATH=$RUBY187_PATH/bin:$PATH_ORIG
-/opt/rubies/latest/passenger-root/bin/passenger-config build-native-support
+/opt/passenger/root/bin/passenger-config build-native-support
 
 cd /
 rm -rf $TMP_PATH
