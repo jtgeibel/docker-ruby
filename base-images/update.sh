@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
 
-USER=jtgeibel
+user=jtgeibel
 
-BASE=$USER/ruby
-NAME=$USER/passenger-nginx
+BASE=$user/ruby
+NAME=$user/passenger-nginx
 echo "Building $NAME"
 cat passenger-nginx-install | docker run -i --name building-passenger "$BASE" /bin/sh
 docker commit building-passenger "$NAME"
@@ -13,4 +13,4 @@ echo "Build success, image tagged as $NAME"
 
 read -p "Press Enter to push to the registry, or Ctrl+C to cancel" noop
 
-docker push $USER/passenger-nginx:latest
+docker push $user/passenger-nginx:latest

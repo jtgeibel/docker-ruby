@@ -2,10 +2,10 @@
 set -e
 set -x
 
-USER=jtgeibel
+user=jtgeibel
 
-BASE=$USER/passenger-nginx
-NAME=$USER/pge
+BASE=$user/passenger-nginx
+NAME=$user/pge
 
 cat inject.sh | docker run -i --name building-pge "$BASE" /bin/sh
 docker commit building-pge "$NAME"
