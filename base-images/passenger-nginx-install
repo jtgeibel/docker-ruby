@@ -4,22 +4,20 @@ set -e
 apt-get update
 apt-get upgrade -y
 
-NGINX_VERSION=1.6.2
-PASSENGER_VERSION=4.0.56
+NGINX_VERSION=1.8.1
+PASSENGER_VERSION=5.0.25
 
-RUBY_220=2.2.0 # latest
-RUBY_193=1.9.3-p551 # old old stable
+RUBY_230=2.3.0 # latest
 RUBY_187=1.8.7-p374 # depreciated
 
-RUBY220_PATH=/opt/rubies/2.2
-RUBY193_PATH=/opt/rubies/1.9.3
+RUBY230_PATH=/opt/rubies/2.3
 RUBY187_PATH=/opt/rubies/1.8.7
 
 
 TMP_PATH=/tmp/nginx-build
 
 PATH_ORIG=$PATH
-export PATH=$RUBY220_PATH/bin:$PATH_ORIG
+export PATH=$RUBY230_PATH/bin:$PATH_ORIG
 
 mkdir -p $TMP_PATH
 cd $TMP_PATH
@@ -30,7 +28,7 @@ tar xfz nginx-$NGINX_VERSION.tar.gz
 cd nginx-$NGINX_VERSION
 
 gem install passenger -v "$PASSENGER_VERSION"
-ln -s $RUBY220_PATH/lib/ruby/gems/2.2.0/gems/passenger-$PASSENGER_VERSION /opt/passenger/root
+ln -s $RUBY230_PATH/lib/ruby/gems/2.3.0/gems/passenger-$PASSENGER_VERSION /opt/passenger/root
 
 # Configure passenger (with ubuntu-style paths)
 passenger-install-nginx-module \
@@ -47,9 +45,6 @@ passenger-install-nginx-module \
 
 # Precompile passenger native_support for other rubies
 # https://code.google.com/p/phusion-passenger/issues/detail?id=865
-/opt/passenger/root/bin/passenger-config build-native-support
-
-export PATH=$RUBY193_PATH/bin:$PATH_ORIG
 /opt/passenger/root/bin/passenger-config build-native-support
 
 export PATH=$RUBY187_PATH/bin:$PATH_ORIG

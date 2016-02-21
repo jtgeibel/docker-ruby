@@ -7,12 +7,10 @@ cd /opt/ruby-build
 git pull
 ./install.sh
 
-RUBY_220=2.2.0 # latest
-RUBY_193=1.9.3-p551 # old stable
+RUBY_230=2.3.0 # latest
 RUBY_187=1.8.7-p375 # depreciated
 
-RUBY220_PATH=/opt/rubies/2.2
-RUBY193_PATH=/opt/rubies/1.9.3
+RUBY230_PATH=/opt/rubies/2.3
 RUBY187_PATH=/opt/rubies/1.8.7
 
 export RUBY_CONFIGURE_OPTS="--disable-install-doc"
@@ -22,17 +20,13 @@ export MAKE_OPTS="-j2"
 
 mkdir -p /opt/passenger
 
-echo "Installing $RUBY_220"
-/usr/local/bin/ruby-build $RUBY_220 $RUBY220_PATH
-PATH=$RUBY220_PATH/bin gem install bundler
-
-echo "Installing $RUBY_193"
-/usr/local/bin/ruby-build $RUBY_193 $RUBY193_PATH
-PATH=$RUBY193_PATH/bin gem install bundler rake
+echo "Installing $RUBY_230"
+/usr/local/bin/ruby-build $RUBY_230 $RUBY230_PATH
+PATH=$RUBY230_PATH/bin gem install bundler
 
 echo "Installing $RUBY_187"
 /usr/local/bin/ruby-build $RUBY_187 $RUBY187_PATH
 PATH=$RUBY187_PATH/bin gem update --system 1.8.30
 PATH=$RUBY187_PATH/bin gem install bundler rake
 
-ln -s $RUBY220_PATH/bin/ruby /opt/passenger/ruby
+ln -s $RUBY230_PATH/bin/ruby /opt/passenger/ruby
